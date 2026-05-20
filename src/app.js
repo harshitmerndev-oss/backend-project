@@ -1,11 +1,12 @@
 import express from "express";
 import cors from "cors";
 import cookieparser from "cookie-parser";
-import e from "express";
+import userRouter from "./routes/users.routes.js";
+
 const app = express();
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: process.env.CORS_ORIGIN || "*",
     credentials: true,
   })
 );
@@ -17,5 +18,11 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(cookieparser());
+
+app.use("/api/v1/user", userRouter);
+
+
+
+
 export default app;
  
